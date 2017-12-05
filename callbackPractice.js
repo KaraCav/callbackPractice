@@ -19,95 +19,99 @@ and what you should write is the sayHi function that makes the code above work,
     
 */
 
-
 // 1. Write a function called first that returns the first item of the array using a callback function
 
-  // Code Here
-
-  
+function first(arr, cb) {
+  var firstName = cb(arr[0]);
+}
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
-first(names, function(firstName){
+first(names, function(firstName) {
   console.log('The first name in names is ' + firstName);
   return firstName;
 });
 
-
-
 // 2. Write a function called last which returns the last item of the array using a callback function.
+var names = ['michaels', 'smith'];
 
-  //Code Here
+function last(arr, cb) {
+  return cb(arr[arr.length - 1]);
+}
 
-
-
-last(names, function(lastName){
+last(names, function(lastName) {
   console.log('The last name in names is ' + lastName);
   return lastName;
 });
 
+// // 3. Write a function called multiply that multiplies two numbers. Invoke the callback with the result of the multiplication.
 
+//   //Code Here
 
-// 3. Write a function called multiply that multiplies two numbers. Invoke the callback with the result of the multiplication. 
+function multiply(num1, num2, cb) {
+  return cb(num1 * num2);
+}
 
-  //Code Here
-
-
-
-multiply(4, 3, function(answer){
+multiply(4, 3, function(answer) {
   console.log('The answer is ' + answer); //should console.log 12
-})
+});
 
+// // 4. Write a function called contains that checks if a name exists in an array.
+// // If it does, invoke the callback with true as an argument.
+// // If the name does not exist, invoke the callback with false as an argument.
 
+//function checker() {} //Code Here
 
-// 4. Write a function called contains that checks if a name exists in an array. 
-// If it does, invoke the callback with true as an argument. 
-// If the name does not exist, invoke the callback with false as an argument.
+// const contains = (arr, str, cb) => arr.indexOf(str) !== -1 ? cb(true) : cb(false);
+function contains(arr, name, cb) {
+  if (arr.indexOf(name) < 0) {
+    cb(false);
+  } else {
+    cb(true);
+  }
+}
 
-  //Code Here 
-
-
-
-
-contains(names, 'Colt', function(result){
-  if(result === true){
+contains(names, 'Colt', function(result) {
+  if (result === true) {
     console.log('Colt is in the array');
   } else {
     console.log('Colt is not in the array');
   }
 });
 
+// // 5. Write a function called uniq that takes the names array and removes all duplicates.
+// // Invoke the callback with the modified array as an argument.
+function uniq(names, callback) {
+  callback(Array.from(new Set(names)));
+}
 
-
-// 5. Write a function called uniq that takes the names array and removes all duplicates.
-// Invoke the callback with the modified array as an argument.
-
-  //Code Here
-
-
-
-uniq(names, function(uniqArr){
-  console.log('The new names array with all the duplicate items removed is ', uniqArr);
+uniq(names, function(uniqArr) {
+  console.log(
+    'The new names array with all the duplicate items removed is ',
+    uniqArr
+  );
 });
 
+// // 6. Write a function called each that takes in an array of names. For each name in the array, invoke the callback and pass in the name and the name's index as arguments.
 
-// 6. Write a function called each that takes in an array of names. For each name in the array, invoke the callback and pass in the name and the name's index as arguments.
+//     //Code Here
+const each = (names, callback) => {
+  names.forEach(val => callback(val, names.indexOf(val)));
+};
 
-    //Code Here 
-
-
-
-each(names, function(item, indice){
-  console.log('The item in the ' + indice + ' position is ' + item)
+each(names, function(item, indice) {
+  console.log('The item in the ' + indice + ' position is ' + item);
 });
-
-
 
 // 7. Write a function called getUserById that looks at the array of user objects (users) and searches for a user by ID.
 // When the correct user object is found, invoke the callback with the user object as an argument.
 
 // Code here
-
-
-
+const getUserById = (arr, name, cb) => {
+  arr.forEach(val => {
+    if (val.id === name) {
+      cb(val);
+    }
+  });
+};
 var users = [
   {
     id: '12d',
@@ -126,9 +130,16 @@ var users = [
     email: 'ryan@gmail.com',
     name: 'Ryan',
     address: '192 East 32 North'
-  },
+  }
 ];
 
-getUserById(users, '16t', function(user){
-  console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address); 
+getUserById(users, '16t', function(user) {
+  console.log(
+    'The user with the id 16t has the email of ' +
+      user.email +
+      ' the name of ' +
+      user.name +
+      ' and the address of ' +
+      user.address
+  );
 });
